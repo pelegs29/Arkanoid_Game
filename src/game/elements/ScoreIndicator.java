@@ -2,6 +2,7 @@
 package game.elements;
 
 import biuoop.DrawSurface;
+import game.GameFlow;
 import game.GameLevel;
 import game.listeners.ScoreTrackingListener;
 import game.sprites.Sprite;
@@ -30,7 +31,7 @@ public class ScoreIndicator implements Sprite {
 
     @Override
     public void drawOn(DrawSurface d) {
-        int textXVal = (GameLevel.GUI_WIDTH / 2) - 40;
+        int textXVal = (GameFlow.GUI_WIDTH / 2) - 40;
         int textYVal = 17;
         d.drawText(textXVal, textYVal, "Score: " + this.scoreListener.getCurrentScore().toString(), textYVal);
     }

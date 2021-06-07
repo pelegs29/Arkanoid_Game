@@ -24,7 +24,7 @@ import java.util.List;
  */
 public class GameLevel implements Animation {
 
-    //game.sprites field is final until a setter will be needed.
+    //sprites field is final until a setter will be needed.
     private final SpriteCollection sprites;
     private game.GameEnvironment environment;
     private biuoop.GUI gui;
@@ -32,21 +32,17 @@ public class GameLevel implements Animation {
     private KeyboardSensor keyboard;
     private LevelInformation levelInformation;
     private boolean running;
+    private boolean lost;
     private Counter blocksLeft;
     private Counter ballsLeft;
     private Counter score;
 
     //Class Constants
-    public static final int GUI_WIDTH = 800;
-    public static final int GUI_HEIGHT = 600;
     public static final int BORDER_WIDTH = 20;
-    public static final int NUM_OF_ROWS = 6;
-    public static final int NUM_OF_MIN_COL = 7;
 
     /**
-     * Sole Constructor.
-     * setting up game.game.Game using default
-     * SpriteCollection and game.GameEnvironment default constructors.
+     * Main Constructor 1.
+     * setting up the level using the level information given.
      */
     public GameLevel(LevelInformation levelInformation) {
         this.sprites = new SpriteCollection();
@@ -54,16 +50,18 @@ public class GameLevel implements Animation {
         this.levelInformation = levelInformation;
     }
 
-    /**
-     * Main Constructor.
-     * setting up a game.Game object using the given args.
-     *
-     * @param sprites         game.Game's SpriteCollection object.
-     * @param gameEnvironment game.Game's game.GameEnvironment object.
-     */
-    public GameLevel(SpriteCollection sprites, game.GameEnvironment gameEnvironment) {
-        this.sprites = sprites;
-        this.environment = gameEnvironment;
+
+    public GameLevel(LevelInformation level, KeyboardSensor sensor, AnimationRunner runner,
+                     GUI gameGui, Counter score) {
+        this.sprites = new SpriteCollection();
+        this.environment = new game.GameEnvironment();
+        this.levelInformation = level;
+        this.keyboard = sensor;
+        this.runner = runner;
+        this.gui = gameGui;
+        this.score = score;
+        this.lost = false;
+        this.running = true;
     }
 
     /**
@@ -107,14 +105,8 @@ public class GameLevel implements Animation {
      * Blocks, Ball and Paddle and adds them to the game.Game.
      */
     public void initialize() {
-        GUI gameGui = new GUI("Arkanoid Game", GUI_WIDTH, GUI_HEIGHT);
-        this.setGui(gameGui);
-        this.runner = new AnimationRunner(gameGui);
-        this.keyboard = gui.getKeyboardSensor();
-
         this.blocksLeft = new Counter(this.levelInformation.numberOfBlocksToRemove());
         this.ballsLeft = new Counter();
-        this.score = new Counter();
 
         BlockRemover blockRemover = new BlockRemover(this, this.blocksLeft);
         BallRemover ballRemover = new BallRemover(this, this.ballsLeft);
@@ -132,7 +124,6 @@ public class GameLevel implements Animation {
         }
 
         //creates the blocks, the "death block" and the balls.
-        //this.createNRowOfBlocks(NUM_OF_ROWS, blockRemover, printer, scoreListener);
         createBlocksFromList(this.levelInformation.blocks(), blockRemover, scoreListener);
         createDeathBlock(ballRemover);
         createBallsFromList(this.levelInformation.initialBallVelocities());
@@ -163,11 +154,10 @@ public class GameLevel implements Animation {
             this.running = false;
         }
         if (this.ballsLeft.getValue() == 0) {
-            gui.close();
             this.running = false;
+            this.lost = true;
         } else if (this.blocksLeft.getValue() == 0) {
             this.score.increase(100);
-            gui.close();
             this.running = false;
         }
         if (this.keyboard.isPressed("p")) {
@@ -181,6 +171,10 @@ public class GameLevel implements Animation {
     @Override
     public boolean shouldStop() {
         return !this.running;
+    }
+
+    public boolean isGameOver() {
+        return this.lost;
     }
 
     /**
@@ -228,8 +222,8 @@ public class GameLevel implements Animation {
      * @param ballRemover given ballRemover hitListener.
      */
     private void createDeathBlock(HitListener ballRemover) {
-        Block deathBlock = new Block(new Point(BORDER_WIDTH, GameLevel.GUI_HEIGHT + (Ball.DEFAULT_SIZE)),
-                GameLevel.GUI_WIDTH, (GameLevel.GUI_WIDTH - GameLevel.GUI_HEIGHT));
+        Block deathBlock = new Block(new Point(BORDER_WIDTH, GameFlow.GUI_HEIGHT + (Ball.DEFAULT_SIZE)),
+                GameFlow.GUI_WIDTH, (GameFlow.GUI_WIDTH - GameFlow.GUI_HEIGHT));
         deathBlock.addToCollidables(this);
         deathBlock.addHitListener(ballRemover);
     }

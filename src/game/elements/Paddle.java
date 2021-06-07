@@ -3,6 +3,7 @@ package game.elements;
 
 import biuoop.DrawSurface;
 import biuoop.KeyboardSensor;
+import game.GameFlow;
 import game.GameLevel;
 import game.GameEnvironment;
 import game.collidables.Collidable;
@@ -49,8 +50,8 @@ public class Paddle implements Sprite, Collidable {
         this.paddleDrift = paddleSpeed;
         this.keyboard = keyboardSensor;
         this.gameEnvironment = environment;
-        double paddleXvalue = (GameLevel.GUI_WIDTH / 2.0) - (paddleWidth / 2.0);
-        double paddleYvalue = GameLevel.GUI_HEIGHT - (GameLevel.BORDER_WIDTH + PADDLE_HEIGHT);
+        double paddleXvalue = (GameFlow.GUI_WIDTH / 2.0) - (paddleWidth / 2.0);
+        double paddleYvalue = GameFlow.GUI_HEIGHT - (GameLevel.BORDER_WIDTH + PADDLE_HEIGHT);
         this.paddle = new Rectangle(new Point(paddleXvalue, paddleYvalue), paddleWidth, PADDLE_HEIGHT);
     }
 
@@ -84,8 +85,8 @@ public class Paddle implements Sprite, Collidable {
                 != (gameEnvironment.getRightSide().getCollisionRectangle().getLowerLeft().getX())) {
             double newXVal = this.paddle.getUpperLeft().getX() + this.paddleDrift;
             int width = (int) this.paddle.getWidth();
-            if (newXVal + width >= GameLevel.GUI_WIDTH - GameLevel.BORDER_WIDTH) {
-                newXVal =(GameLevel.GUI_WIDTH - GameLevel.BORDER_WIDTH - width);
+            if (newXVal + width >= GameFlow.GUI_WIDTH - GameLevel.BORDER_WIDTH) {
+                newXVal =(GameFlow.GUI_WIDTH - GameLevel.BORDER_WIDTH - width);
             }
             double yVal = this.paddle.getUpperLeft().getY();
             this.paddle = new Rectangle(new Point(newXVal, yVal), width, PADDLE_HEIGHT);
@@ -114,11 +115,11 @@ public class Paddle implements Sprite, Collidable {
     @Override
     public void timePassed() {
         if (keyboard.isPressed(KeyboardSensor.RIGHT_KEY)) {
-            System.out.println("the 'right arrow' key is pressed");
+            //System.out.println("the 'right arrow' key is pressed");
             moveRight();
         }
         if (keyboard.isPressed(KeyboardSensor.LEFT_KEY)) {
-            System.out.println("the 'left arrow' key is pressed");
+            //System.out.println("the 'left arrow' key is pressed");
             moveLeft();
         }
     }

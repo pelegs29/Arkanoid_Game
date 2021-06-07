@@ -2,6 +2,7 @@
 package game.elements;
 
 import biuoop.DrawSurface;
+import game.GameFlow;
 import game.GameLevel;
 import game.GameEnvironment;
 import game.collidables.CollisionInfo;
@@ -106,7 +107,7 @@ public class Ball implements Sprite {
         surface.setColor(this.color);
 
         //create ball only if he is smaller than the gui size.
-        if (!(this.size * 2 > Math.min(GameLevel.GUI_HEIGHT, GameLevel.GUI_WIDTH))) {
+        if (!(this.size * 2 > Math.min(GameFlow.GUI_HEIGHT, GameFlow.GUI_WIDTH))) {
             surface.fillCircle(this.getX(), this.getY(), this.size);
             surface.setColor(Color.BLACK);
             surface.drawCircle(this.getX(), this.getY(), this.size);

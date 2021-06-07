@@ -19,8 +19,8 @@ public class SecondLevel implements LevelInformation {
     @Override
     public List<Velocity> initialBallVelocities() {
         List<Velocity> velocityList = new ArrayList<>();
-        for (int i = 10; i <= this.numberOfBalls() * 10; i = i + 10) {
-            Velocity velocity = Velocity.fromAngleAndSpeed(310 + i,
+        for (int i = 5; i <= this.numberOfBalls() * 5; i = i + 5) {
+            Velocity velocity = Velocity.fromAngleAndSpeed(330 + i,
                     Velocity.generateSpeed(Ball.DEFAULT_SIZE));
             velocityList.add(velocity);
         }
@@ -45,7 +45,7 @@ public class SecondLevel implements LevelInformation {
     @Override
     public Sprite getBackground() {
         Block background = new Block(new Point(0, 0),
-                GameLevel.GUI_WIDTH * 2, GameLevel.GUI_HEIGHT * 2);
+                GameFlow.GUI_WIDTH * 2, GameFlow.GUI_HEIGHT * 2);
         background.setColor(Color.WHITE);
         return background;
     }

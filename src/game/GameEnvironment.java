@@ -116,8 +116,8 @@ public class GameEnvironment {
      */
     public List<Collidable> getBordersBlocks(int sizeOfBlock) {
         List<Collidable> borders = new ArrayList<>();
-        int width = GameLevel.GUI_WIDTH;
-        int height = GameLevel.GUI_HEIGHT;
+        int width = GameFlow.GUI_WIDTH;
+        int height = GameFlow.GUI_HEIGHT;
         Block score = new Block(new Point(0, 0), width, sizeOfBlock);
         score.setColor(Color.LIGHT_GRAY);
         Block top = new Block(new Point(0, sizeOfBlock), width - sizeOfBlock, sizeOfBlock);

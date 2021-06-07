@@ -19,8 +19,8 @@ public class ForthLevel implements LevelInformation {
     @Override
     public List<Velocity> initialBallVelocities() {
         List<Velocity> velocityList = new ArrayList<>();
-        for (int i = 25; i <= this.numberOfBalls() * 25; i = i + 25) {
-            Velocity velocity = Velocity.fromAngleAndSpeed(310 + i,
+        for (int i = 20; i <= this.numberOfBalls() * 20; i = i + 20) {
+            Velocity velocity = Velocity.fromAngleAndSpeed(320 + i,
                     Velocity.generateSpeed(Ball.DEFAULT_SIZE));
             velocityList.add(velocity);
         }
@@ -29,12 +29,12 @@ public class ForthLevel implements LevelInformation {
 
     @Override
     public int paddleSpeed() {
-        return 10;
+        return 15;
     }
 
     @Override
     public int paddleWidth() {
-        return 120;
+        return 150;
     }
 
     @Override
@@ -45,7 +45,7 @@ public class ForthLevel implements LevelInformation {
     @Override
     public Sprite getBackground() {
         Block background = new Block(new Point(0, 0),
-                GameLevel.GUI_WIDTH * 2, GameLevel.GUI_HEIGHT * 2);
+                GameFlow.GUI_WIDTH * 2, GameFlow.GUI_HEIGHT * 2);
         background.setColor(new Color(30, 114, 206));
         return background;
     }
@@ -59,7 +59,7 @@ public class ForthLevel implements LevelInformation {
                     Color.BLUE, Color.MAGENTA, Color.WHITE, Color.PINK};
             for (int j = 0; j < 10; j++) {
                 int newXVal = GameLevel.BORDER_WIDTH + (j * Block.DEFAULT_WIDTH);
-                int newYVal = 150 + (Block.DEFAULT_HEIGHT * i);
+                int newYVal = 100 + (Block.DEFAULT_HEIGHT * i);
                 Block block = new Block(new Point(newXVal, newYVal), Block.DEFAULT_WIDTH, Block.DEFAULT_HEIGHT);
                 block.setColor(colorsArr[i]);
                 blocksList.add(block);
