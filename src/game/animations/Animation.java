@@ -1,4 +1,4 @@
-package game;
+package game.animations;
 
 import biuoop.DrawSurface;
 

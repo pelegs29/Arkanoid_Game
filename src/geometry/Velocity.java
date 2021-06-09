@@ -17,7 +17,7 @@ public class Velocity {
     private final double dy;
 
     //Class constants
-    public static final double SPEED_FACTOR = 45.0;
+    public static final double SPEED_FACTOR = 35.0;
     public static final int MAX_SIZE_SPEED = 50;
 
     /**

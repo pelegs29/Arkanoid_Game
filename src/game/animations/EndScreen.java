@@ -1,18 +1,16 @@
-package game;
+package game.animations;
 
 import biuoop.DrawSurface;
-import biuoop.KeyboardSensor;
-import game.elements.Block;
+import game.GameFlow;
 import game.elements.Counter;
 
 import java.awt.Color;
 
-public class EndScreen extends PauseScreen {
-    Boolean hasWon;
-    String scoreString;
+public class EndScreen implements Animation {
+    private final Boolean hasWon;
+    private final String scoreString;
 
-    public EndScreen(KeyboardSensor k, boolean victoryFlag, Counter score) {
-        super(k);
+    public EndScreen(boolean victoryFlag, Counter score) {
         this.hasWon = victoryFlag;
         this.scoreString = String.valueOf(score.getValue());
     }
@@ -31,13 +29,16 @@ public class EndScreen extends PauseScreen {
         d.setColor(Color.BLACK);
         d.drawText((d.getWidth() / 2) - 285, (d.getHeight() / 3) + 5, endString, 100);
         d.drawText(143, (d.getHeight() / 2) + 253, "-- please press 'space' to exit --", 32);
-        d.drawText(140, (d.getHeight() / 2) -6, "Your Score is " + scoreString, 60);
+        d.drawText(140, (d.getHeight() / 2) - 6, "Your Score is " + scoreString, 60);
         d.setColor(Color.WHITE);
         d.drawText((d.getWidth() / 2) - 290, d.getHeight() / 3, endString, 100);
         d.drawText(140, (d.getHeight() / 2) + 250, "-- please press 'space' to exit --", 32);
-        d.drawText(136, (d.getHeight() / 2) -10, "Your Score is " + scoreString, 60);
-        if (this.keyboard.isPressed(KeyboardSensor.SPACE_KEY)) {
-            this.stop = true;
-        }
+        d.drawText(136, (d.getHeight() / 2) - 10, "Your Score is " + scoreString, 60);
     }
+
+    @Override
+    public boolean shouldStop() {
+        return false;
+    }
+
 }

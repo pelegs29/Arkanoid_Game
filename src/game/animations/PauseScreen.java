@@ -1,17 +1,13 @@
-package game;
+package game.animations;
 
 import biuoop.DrawSurface;
-import biuoop.KeyboardSensor;
+import game.GameFlow;
 
 import java.awt.Color;
 
 public class PauseScreen implements Animation {
-    protected final KeyboardSensor keyboard;
-    protected boolean stop;
 
-    public PauseScreen(KeyboardSensor k) {
-        this.keyboard = k;
-        this.stop = false;
+    public PauseScreen() {
     }
 
     @Override
@@ -24,13 +20,10 @@ public class PauseScreen implements Animation {
         d.setColor(Color.WHITE);
         d.drawText((d.getWidth() / 2) - 170, d.getHeight() / 3, "Paused", 100);
         d.drawText(140, (d.getHeight() / 2) + 250, "-- please press 'space' to continue --", 32);
-        if (this.keyboard.isPressed(KeyboardSensor.SPACE_KEY)) {
-            this.stop = true;
-        }
     }
 
     @Override
     public boolean shouldStop() {
-        return this.stop;
+        return false;
     }
 }

@@ -1,5 +1,6 @@
-package game;
+package game.levels;
 
+import game.GameLevel;
 import game.elements.Ball;
 import game.elements.Block;
 import game.sprites.Sprite;
@@ -29,7 +30,7 @@ public class SecondLevel implements LevelInformation {
 
     @Override
     public int paddleSpeed() {
-        return 10;
+        return 2;
     }
 
     @Override
@@ -44,10 +45,7 @@ public class SecondLevel implements LevelInformation {
 
     @Override
     public Sprite getBackground() {
-        Block background = new Block(new Point(0, 0),
-                GameFlow.GUI_WIDTH * 2, GameFlow.GUI_HEIGHT * 2);
-        background.setColor(Color.WHITE);
-        return background;
+        return new SecondLevelBackground();
     }
 
     @Override
@@ -56,10 +54,10 @@ public class SecondLevel implements LevelInformation {
         colorsArr = new Color[]{Color.RED, Color.GREEN, Color.ORANGE,
                 Color.BLUE, Color.MAGENTA, Color.PINK};
         List<Block> blocksList = new ArrayList<>();
-        for (int i = 0, j = 0; i < 8; i++) {
-            int width = Block.DEFAULT_WIDTH + 19;
+        for (int i = 0, j = 0; i < 10; i++) {
+            int width = Block.DEFAULT_WIDTH;
             int newXVal = GameLevel.BORDER_WIDTH + (i * width);
-            Block block = new Block(new Point(newXVal, 150),
+            Block block = new Block(new Point(newXVal, 250),
                     width, Block.DEFAULT_HEIGHT);
             block.setColor(colorsArr[j]);
             if (i % 2 == 0) {

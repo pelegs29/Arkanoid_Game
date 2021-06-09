@@ -32,7 +32,7 @@ public class Ball implements Sprite {
     private GameEnvironment environment;
 
     //Class Constants
-    public static final int DEFAULT_SIZE = 7;
+    public static final int DEFAULT_SIZE = 5;
 
     /**
      * Main Constructor 1.

@@ -1,4 +1,4 @@
-package game;
+package game.levels;
 
 import game.elements.Block;
 import game.sprites.Sprite;

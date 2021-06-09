@@ -1,5 +1,6 @@
-package game;
+package game.levels;
 
+import game.GameFlow;
 import game.elements.Ball;
 import game.elements.Block;
 import game.sprites.Sprite;
@@ -41,16 +42,13 @@ public class FirstLevel implements LevelInformation {
 
     @Override
     public Sprite getBackground() {
-        Block background = new Block(new Point(0, 0),
-                GameFlow.GUI_WIDTH * 2, GameFlow.GUI_HEIGHT * 2);
-        background.setColor(new Color(30, 30, 33));
-        return background;
+        return new FirstLevelBackground();
     }
 
     @Override
     public List<Block> blocks() {
         List<Block> blocksList = new ArrayList<>();
-        Block block = new Block(new Point((GameFlow.GUI_WIDTH / 2.0) - 10, 150),
+        Block block = new Block(new Point((GameFlow.GUI_WIDTH / 2.0) -15 , 150),
                 30, 30);
         block.setColor(Color.RED);
         blocksList.add(block);

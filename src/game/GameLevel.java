@@ -3,15 +3,16 @@ package game;//318509700
 import biuoop.DrawSurface;
 import biuoop.GUI;
 import biuoop.KeyboardSensor;
+import game.animations.*;
 import game.collidables.Collidable;
 import game.elements.*;
+import game.levels.LevelInformation;
 import game.listeners.*;
 import game.sprites.Sprite;
 import game.sprites.SpriteCollection;
 import geometry.Point;
 import geometry.Velocity;
 
-import java.awt.*;
 import java.util.List;
 
 /**
@@ -30,7 +31,7 @@ public class GameLevel implements Animation {
     private biuoop.GUI gui;
     private AnimationRunner runner;
     private KeyboardSensor keyboard;
-    private LevelInformation levelInformation;
+    private final LevelInformation levelInformation;
     private boolean running;
     private boolean lost;
     private Counter blocksLeft;
@@ -144,7 +145,7 @@ public class GameLevel implements Animation {
      */
     public void run() {
         this.running = true;
-        this.runner.run(new CountdownAnimation(2, 3, this.sprites, this.gui));
+        this.runner.run(new CountdownAnimation(2, 3, this.sprites));
         this.runner.run(this);
     }
 
@@ -161,7 +162,7 @@ public class GameLevel implements Animation {
             this.running = false;
         }
         if (this.keyboard.isPressed("p")) {
-            this.runner.run(new PauseScreen(this.keyboard));
+            this.runner.run(new KeyPressStoppableAnimation(this.keyboard, KeyboardSensor.SPACE_KEY, new PauseScreen()));
         }
 
         this.sprites.drawAllOn(d);

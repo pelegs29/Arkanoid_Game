@@ -2,8 +2,12 @@ package game;
 
 import biuoop.GUI;
 import biuoop.KeyboardSensor;
+import game.animations.AnimationRunner;
+import game.animations.EndScreen;
+import game.animations.KeyPressStoppableAnimation;
+import game.animations.WelcomeScreen;
 import game.elements.Counter;
-import game.listeners.ScoreTrackingListener;
+import game.levels.LevelInformation;
 
 import java.util.List;
 
@@ -24,7 +28,9 @@ public class GameFlow {
 
     public void runLevels(List<LevelInformation> levels) {
         this.score = new Counter();
-        this.animationRunner.run(new WelcomeScreen(this.keyboardSensor));
+        this.animationRunner.run(new KeyPressStoppableAnimation(this.keyboardSensor,
+                KeyboardSensor.SPACE_KEY, new WelcomeScreen()));
+        boolean victoryFlag = true;
         for (LevelInformation levelInfo : levels) {
             GameLevel level = new GameLevel(levelInfo, this.keyboardSensor, this.animationRunner,
                     this.gameGui, this.score);
@@ -36,11 +42,12 @@ public class GameFlow {
             }
 
             if (level.isGameOver()) {
-                this.animationRunner.run(new EndScreen(this.keyboardSensor, false, this.score));
+                victoryFlag = false;
                 break;
             }
         }
-        this.animationRunner.run(new EndScreen(this.keyboardSensor, true, this.score));
+        this.animationRunner.run(new KeyPressStoppableAnimation(this.keyboardSensor,
+                KeyboardSensor.SPACE_KEY, new EndScreen(victoryFlag, this.score)));
         this.gameGui.close();
     }
 }
