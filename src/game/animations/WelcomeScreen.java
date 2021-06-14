@@ -1,3 +1,4 @@
+//318509700
 package game.animations;
 
 import biuoop.DrawSurface;
@@ -5,7 +6,19 @@ import game.GameFlow;
 
 import java.awt.Color;
 
+/**
+ * This class is an Animation of the welcome screen screen at the start of the game.
+ *
+ * @author Peleg Shlomo
+ * @version 1.0
+ * @since 1.0
+ */
 public class WelcomeScreen implements Animation {
+
+    /**
+     * A constructor is not needed -
+     * the class has no fields and keeps running forever.
+     */
     public WelcomeScreen() {
     }
 
@@ -25,6 +38,8 @@ public class WelcomeScreen implements Animation {
 
     @Override
     public boolean shouldStop() {
+
+        //no stopping condition - will stop only with KeyPressStoppableAnimation.
         return false;
     }
 }

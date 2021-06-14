@@ -1,13 +1,26 @@
-package game;//318509700
+//318509700
+package game;
 
 import biuoop.DrawSurface;
 import biuoop.GUI;
 import biuoop.KeyboardSensor;
-import game.animations.*;
+import game.animations.Animation;
+import game.animations.AnimationRunner;
+import game.animations.CountdownAnimation;
+import game.animations.KeyPressStoppableAnimation;
+import game.animations.PauseScreen;
 import game.collidables.Collidable;
-import game.elements.*;
+import game.elements.Ball;
+import game.elements.Block;
+import game.elements.Counter;
+import game.elements.LevelIndicator;
+import game.elements.Paddle;
+import game.elements.ScoreIndicator;
 import game.levels.LevelInformation;
-import game.listeners.*;
+import game.listeners.BallRemover;
+import game.listeners.BlockRemover;
+import game.listeners.HitListener;
+import game.listeners.ScoreTrackingListener;
 import game.sprites.Sprite;
 import game.sprites.SpriteCollection;
 import geometry.Point;
@@ -20,7 +33,7 @@ import java.util.List;
  * the object game.Game.
  *
  * @author Peleg Shlomo
- * @version 1.3
+ * @version 1.8
  * @since 1.0
  */
 public class GameLevel implements Animation {
@@ -29,29 +42,29 @@ public class GameLevel implements Animation {
     private final SpriteCollection sprites;
     private game.GameEnvironment environment;
     private biuoop.GUI gui;
-    private AnimationRunner runner;
-    private KeyboardSensor keyboard;
+    private final AnimationRunner runner;
+    private final KeyboardSensor keyboard;
     private final LevelInformation levelInformation;
     private boolean running;
     private boolean lost;
     private Counter blocksLeft;
     private Counter ballsLeft;
-    private Counter score;
+    private final Counter score;
 
     //Class Constants
     public static final int BORDER_WIDTH = 20;
 
     /**
-     * Main Constructor 1.
-     * setting up the level using the level information given.
+     * Main Constructor.
+     * creates a game level and setting up all of the class field given.
+     * in addition to setting the lost flag to false and running flag to true.
+     *
+     * @param level   given LevelInformation.
+     * @param sensor  given KeyboardSensor.
+     * @param runner  given AnimationRunner.
+     * @param gameGui given Game.GUI.
+     * @param score   given score Counter.
      */
-    public GameLevel(LevelInformation levelInformation) {
-        this.sprites = new SpriteCollection();
-        this.environment = new game.GameEnvironment();
-        this.levelInformation = levelInformation;
-    }
-
-
     public GameLevel(LevelInformation level, KeyboardSensor sensor, AnimationRunner runner,
                      GUI gameGui, Counter score) {
         this.sprites = new SpriteCollection();
@@ -154,13 +167,19 @@ public class GameLevel implements Animation {
         if (getGUI() == null) {
             this.running = false;
         }
+
+        //if no balls are left set the lost flag to true and the running flag to false.
         if (this.ballsLeft.getValue() == 0) {
             this.running = false;
             this.lost = true;
+
+            // if there are no blocks left add 100 points to the counter and set the running flag to false.
         } else if (this.blocksLeft.getValue() == 0) {
             this.score.increase(100);
             this.running = false;
         }
+
+        //stop if 'p' keyboard stroke is pressed.
         if (this.keyboard.isPressed("p")) {
             this.runner.run(new KeyPressStoppableAnimation(this.keyboard, KeyboardSensor.SPACE_KEY, new PauseScreen()));
         }
@@ -174,6 +193,9 @@ public class GameLevel implements Animation {
         return !this.running;
     }
 
+    /**
+     * @return the lost flag of the game.
+     */
     public boolean isGameOver() {
         return this.lost;
     }
@@ -199,7 +221,12 @@ public class GameLevel implements Animation {
         return this.gui;
     }
 
-
+    /**
+     * This method creates the balls in the level
+     * according to the list of balls velocity given by the LevelInformation.
+     *
+     * @param velocityList given list of velocities of the balls.
+     */
     private void createBallsFromList(List<Velocity> velocityList) {
         for (Velocity velocity : velocityList) {
             Ball ball = new Ball(Ball.DEFAULT_SIZE, velocity);
@@ -209,6 +236,13 @@ public class GameLevel implements Animation {
         }
     }
 
+    /**
+     * This method creates the block in the level according to the block list and the listeners given.
+     *
+     * @param blockList     the given list of blocks in the level.
+     * @param remover       the remover listener.
+     * @param scoreListener the score listener.
+     */
     private void createBlocksFromList(List<Block> blockList, HitListener remover, HitListener scoreListener) {
         for (Block block : blockList) {
             block.addToGame(this);

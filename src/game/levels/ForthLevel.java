@@ -1,3 +1,4 @@
+//318509700
 package game.levels;
 
 import game.GameLevel;
@@ -11,6 +12,13 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class holds all of the information of the level.
+ *
+ * @author Peleg Shlomo
+ * @version 1.0
+ * @since 1.0
+ */
 public class ForthLevel implements LevelInformation {
     @Override
     public int numberOfBalls() {
@@ -50,12 +58,14 @@ public class ForthLevel implements LevelInformation {
 
     @Override
     public List<Block> blocks() {
+        int numOfRows = 6;
+        int numOfCols = 10;
         List<Block> blocksList = new ArrayList<>();
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < numOfRows; i++) {
             Color[] colorsArr;
             colorsArr = new Color[]{Color.RED, Color.GREEN, Color.ORANGE,
                     Color.BLUE, Color.MAGENTA, Color.WHITE, Color.PINK};
-            for (int j = 0; j < 10; j++) {
+            for (int j = 0; j < numOfCols; j++) {
                 int newXVal = GameLevel.BORDER_WIDTH + (j * Block.DEFAULT_WIDTH);
                 int newYVal = 100 + (Block.DEFAULT_HEIGHT * i);
                 Block block = new Block(new Point(newXVal, newYVal), Block.DEFAULT_WIDTH, Block.DEFAULT_HEIGHT);

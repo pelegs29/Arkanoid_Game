@@ -1,4 +1,5 @@
-package game;//318509700
+//318509700
+package game;
 
 import game.collidables.Collidable;
 import game.collidables.CollisionInfo;
@@ -6,7 +7,7 @@ import game.elements.Block;
 import geometry.Line;
 import geometry.Point;
 
-import java.awt.*;
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
@@ -17,7 +18,7 @@ import java.util.List;
  * this class will hold the collection of collidable objects.
  *
  * @author Peleg Shlomo
- * @version 1.0
+ * @version 1.2
  * @since 1.0
  */
 public class GameEnvironment {

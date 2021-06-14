@@ -12,7 +12,7 @@ import geometry.Point;
 import geometry.Rectangle;
 import geometry.Velocity;
 
-import java.awt.*;
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +21,7 @@ import java.util.List;
  * the object Paddle.
  *
  * @author Peleg Shlomo
- * @version 1.1
+ * @version 1.5
  * @since 1.0
  */
 public class Paddle implements Sprite, Collidable {
@@ -43,6 +43,8 @@ public class Paddle implements Sprite, Collidable {
      * Main Constructor 1.
      * calculates this paddle spawn point and assign the keyboardSensor and game.GameEnvironment given.
      *
+     * @param paddleSpeed    the given paddle speed.
+     * @param paddleWidth    the given paddle width.
      * @param keyboardSensor given KeyboardSensor keyboard sensor.
      * @param environment    given game.GameEnvironment environment.
      */
@@ -86,7 +88,7 @@ public class Paddle implements Sprite, Collidable {
             double newXVal = this.paddle.getUpperLeft().getX() + this.paddleDrift;
             int width = (int) this.paddle.getWidth();
             if (newXVal + width >= GameFlow.GUI_WIDTH - GameLevel.BORDER_WIDTH) {
-                newXVal =(GameFlow.GUI_WIDTH - GameLevel.BORDER_WIDTH - width);
+                newXVal = (GameFlow.GUI_WIDTH - GameLevel.BORDER_WIDTH - width);
             }
             double yVal = this.paddle.getUpperLeft().getY();
             this.paddle = new Rectangle(new Point(newXVal, yVal), width, PADDLE_HEIGHT);

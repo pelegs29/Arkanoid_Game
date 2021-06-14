@@ -1,3 +1,4 @@
+//318509700
 package game.levels;
 
 import game.GameFlow;
@@ -12,6 +13,13 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class holds all of the information of the level.
+ *
+ * @author Peleg Shlomo
+ * @version 1.0
+ * @since 1.0
+ */
 public class ThirdLevel implements LevelInformation {
     @Override
     public int numberOfBalls() {
@@ -56,6 +64,8 @@ public class ThirdLevel implements LevelInformation {
             Color[] colorsArr;
             colorsArr = new Color[]{Color.RED, Color.GREEN, Color.ORANGE,
                     Color.BLUE, Color.MAGENTA, Color.PINK};
+
+            //loop that create the blocks.
             for (int j = 3 + i; j > 0; j--) {
                 double calculateStartX = GameFlow.GUI_WIDTH - (GameLevel.BORDER_WIDTH + Block.DEFAULT_WIDTH * 7);
                 double newXVal = calculateStartX + (Block.DEFAULT_WIDTH * (7 - j));

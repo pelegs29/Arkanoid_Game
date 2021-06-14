@@ -1,3 +1,4 @@
+//318509700
 package game.levels;
 
 import game.elements.Block;
@@ -6,22 +7,55 @@ import geometry.Velocity;
 
 import java.util.List;
 
+/**
+ * This interface handles the game.LevelInformation methods.
+ *
+ * @author Peleg Shlomo
+ * @version 1.0
+ * @since 1.0
+ */
 public interface LevelInformation {
+
+    /**
+     * @return the number of balls in the start of the level.
+     */
     int numberOfBalls();
+
     // The initial velocity of each ball
     // Note that initialBallVelocities().size() == numberOfBalls()
+
+    /**
+     * @return list of velocities for each ball in the level.
+     */
     List<Velocity> initialBallVelocities();
+
+    /**
+     * @return the paddle speed in the level.
+     */
     int paddleSpeed();
+
+    /**
+     * @return the paddle width in the level.
+     */
     int paddleWidth();
-    // the level name will be displayed at the top of the screen.
+
+    /**
+     * @return the name of the level.
+     */
     String levelName();
-    // Returns a sprite with the background of the level
+
+    /**
+     * @return the sprite of the background
+     */
     Sprite getBackground();
-    // The Blocks that make up this level, each block contains
-    // its size, color and location.
+
+    /**
+     * @return a list of all the block in the level
+     */
     List<Block> blocks();
-    // Number of blocks that should be removed
-    // before the level is considered to be "cleared".
-    // This number should be <= blocks.size();
+
+    /**
+     * @return the number of blocks that should be removed before the level is considered to be "cleared".
+     */
     int numberOfBlocksToRemove();
 }

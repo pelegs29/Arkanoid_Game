@@ -1,7 +1,7 @@
 //318509700
 
 import biuoop.GUI;
-import game.*;
+import game.GameFlow;
 import game.animations.AnimationRunner;
 import game.levels.LevelInformation;
 import game.levels.LevelsBuilder;
@@ -14,7 +14,7 @@ import java.util.List;
  * initializes and runs it.
  *
  * @author Peleg Shlomo
- * @version 1.2
+ * @version 1.5
  * @since 1.0
  */
 public class Ass6Game {
@@ -25,9 +25,9 @@ public class Ass6Game {
      */
     public static void main(String[] args) {
         LevelsBuilder builder = new LevelsBuilder(args);
-        List<LevelInformation> levels_list = new ArrayList<>(builder.buildLevels());
+        List<LevelInformation> levelsList = new ArrayList<>(builder.buildLevels());
         GUI gameGui = new GUI("Arkanoid Game", GameFlow.GUI_WIDTH, GameFlow.GUI_HEIGHT);
         GameFlow game = new GameFlow(new AnimationRunner(gameGui), gameGui.getKeyboardSensor(), gameGui);
-        game.runLevels(levels_list);
+        game.runLevels(levelsList);
     }
 }

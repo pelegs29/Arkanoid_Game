@@ -11,7 +11,7 @@ import geometry.Line;
 import geometry.Point;
 import geometry.Velocity;
 
-import java.awt.*;
+import java.awt.Color;
 import java.util.Random;
 
 /**
@@ -19,7 +19,7 @@ import java.util.Random;
  * the object game.game.elements.Ball.
  *
  * @author Peleg Shlomo
- * @version 1.6
+ * @version 1.9
  * @since 1.0
  */
 public class Ball implements Sprite {

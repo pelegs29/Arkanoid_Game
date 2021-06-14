@@ -1,3 +1,4 @@
+//318509700
 package game.levels;
 
 import game.GameFlow;
@@ -11,6 +12,13 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class holds all of the information of the level.
+ *
+ * @author Peleg Shlomo
+ * @version 1.0
+ * @since 1.0
+ */
 public class FirstLevel implements LevelInformation {
     @Override
     public int numberOfBalls() {
@@ -48,7 +56,7 @@ public class FirstLevel implements LevelInformation {
     @Override
     public List<Block> blocks() {
         List<Block> blocksList = new ArrayList<>();
-        Block block = new Block(new Point((GameFlow.GUI_WIDTH / 2.0) -15 , 150),
+        Block block = new Block(new Point((GameFlow.GUI_WIDTH / 2.0) - 15, 150),
                 30, 30);
         block.setColor(Color.RED);
         blocksList.add(block);

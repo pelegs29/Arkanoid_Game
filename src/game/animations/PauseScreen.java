@@ -1,3 +1,4 @@
+//318509700
 package game.animations;
 
 import biuoop.DrawSurface;
@@ -5,8 +6,19 @@ import game.GameFlow;
 
 import java.awt.Color;
 
+/**
+ * This class is an Animation of the pause screen after the player pressed 'p'.
+ *
+ * @author Peleg Shlomo
+ * @version 1.0
+ * @since 1.0
+ */
 public class PauseScreen implements Animation {
 
+    /**
+     * A constructor is not needed -
+     * the class has no fields and keeps running forever.
+     */
     public PauseScreen() {
     }
 
@@ -24,6 +36,8 @@ public class PauseScreen implements Animation {
 
     @Override
     public boolean shouldStop() {
+
+        //no stopping condition - will stop only with KeyPressStoppableAnimation.
         return false;
     }
 }

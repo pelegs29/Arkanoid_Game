@@ -11,7 +11,7 @@ import geometry.Point;
 import geometry.Rectangle;
 import geometry.Velocity;
 
-import java.awt.*;
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -66,7 +66,7 @@ public class Block implements Collidable, Sprite, HitNotifier {
      */
     private void notifyHit(Ball hitter) {
         // Make a copy of the hitListeners before iterating over them.
-        List<HitListener> listeners = new ArrayList<HitListener>(this.hitListeners);
+        List<HitListener> listeners = new ArrayList<>(this.hitListeners);
         // Notify all game.listeners about a hit event:
         for (HitListener hl : listeners) {
             hl.hitEvent(this, hitter);

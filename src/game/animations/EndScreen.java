@@ -1,3 +1,4 @@
+//318509700
 package game.animations;
 
 import biuoop.DrawSurface;
@@ -6,10 +7,23 @@ import game.elements.Counter;
 
 import java.awt.Color;
 
+/**
+ * This class is an Animation of the end screen after the player lose or win.
+ *
+ * @author Peleg Shlomo
+ * @version 1.0
+ * @since 1.0
+ */
 public class EndScreen implements Animation {
     private final Boolean hasWon;
     private final String scoreString;
 
+    /**
+     * Constructor that sets the win/lose state and the score.
+     *
+     * @param victoryFlag true - if the player won and false if he lost.
+     * @param score       the score counter.
+     */
     public EndScreen(boolean victoryFlag, Counter score) {
         this.hasWon = victoryFlag;
         this.scoreString = String.valueOf(score.getValue());
@@ -18,6 +32,8 @@ public class EndScreen implements Animation {
     @Override
     public void doOneFrame(DrawSurface d) {
         String endString;
+
+        //if to choose the ending screen title and background according to the win/lose state.
         if (this.hasWon) {
             endString = "You Win!";
             d.setColor(new Color(23, 179, 35));
@@ -38,7 +54,8 @@ public class EndScreen implements Animation {
 
     @Override
     public boolean shouldStop() {
+
+        //no stopping condition - will stop only with KeyPressStoppableAnimation.
         return false;
     }
-
 }
